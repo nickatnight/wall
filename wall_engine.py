@@ -91,7 +91,7 @@ class Wall():
             print '%s\'s word list:' % self.player.username
             print len(self.player.username) * '-' + '-------------'
             for word, meaning in self.word_list.items():
-                print '\t%s: \t%s' % (word, meaning)
+                print '{0:>14}: {1}'.format(word, meaning)
 
     def enter_word(self, new_word):
         """
@@ -106,7 +106,7 @@ class Wall():
             print 'Too many colons in your input.'
         elif new_word[0] not in self.word_list:
             try:
-                self.word_list[new_word[0].strip()] = new_word[1].strip()
+                self.word_list[new_word[0]] = new_word[1]
                 print 'Your word \'%s\' was successfully added to the wall' % (new_word[0])
             except:
                 print 'Invalid input. Please try again later.'
@@ -131,6 +131,18 @@ class Wall():
                 print 'The definition for \'%s\' has been successfully.' % word
             else:
                 print 'Invalid input, please try again.'
+
+    def delete_word(self, word):
+        """
+        Function to delete word and meaning from the word list.
+        """
+        if word not in self.word_list:
+            print 'The word list does not contain that word.'
+        elif len(self.word_list) == 0:
+            print 'The word list is empty!'
+        else:
+            del self.word_list[word]
+            print '\'%s\' was successfully removed from your wall.' % word
 
     def load_user_list(self):
         """
